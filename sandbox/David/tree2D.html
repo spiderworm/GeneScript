@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+
+<script src="../node_modules/three/three.js"></script>
+<script src="../lib/threejs/examples/js/controls/FirstPersonControls.js"></script>
+<script src="../node_modules/requirejs/require.js"></script>
+<script>
+  requirejs.config({
+    baseUrl: '../',
+    paths: {
+      es6: "node_modules/requirejs-babel/es6",
+      babel: "node_modules/requirejs-babel/babel-4.6.6.min"
+    }
+  });
+</script>
+
+</head>
+<body>
+
+  <main>
+    <canvas width="600" height="600"></canvas>
+  </main>
+
+  <script>
+    require(['es6!./sandbox/tree2D'], function(Demo) {
+
+      var canvas = document.querySelector('canvas');
+      var blockSize = 20;
+      var nodeDistance = 1;
+      var nodeDensity = .6;
+
+      var demo = new Demo(canvas, blockSize, nodeDistance, nodeDensity);
+
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+
+<script src="../node_modules/requirejs/require.js"></script>
+<script>
+  requirejs.config({
+    paths: {
+      es6: "../node_modules/requirejs-babel/es6",
+      babel: "../node_modules/requirejs-babel/babel-4.6.6.min"
+    }
+  });
+</script>
+
+</head>
+<body>
+
+<canvas width="400" height="400"></canvas>
+
+<script>
+
+  require(
+    [
+      'es6!../lib/noise'
+    ],
+    function(
+      noise
+    ) {
+
+      var seed = "2819583929350242235345363234636356";
+      noise.seed(parseInt(seed));
+
+      var canvas = document.querySelector('canvas');
+      canvas.width = 400;
+      canvas.height = 400;
+
+      var ctx = canvas.getContext('2d');
+
+      var image = ctx.createImageData(canvas.width, canvas.height);
+      var data = image.data;
+
+      var height = 0;
+      // Cache width and height values for the canvas.
+      var cWidth = canvas.width;
+      var cHeight = canvas.height;
+
+      function drawFrame() {
+
+        for (var x = 0; x < cWidth; x++) {
+          for (var y = 0; y < cHeight; y++) {
+            var value = (noise.simplex3(x / 50, y / 50, height / 50) + 1) / 2;
+            var color = Math.floor(value * 255);
+
+            var cell = (x + y * cWidth) * 4;
+            data[cell] = data[cell + 1] = data[cell + 2] = color; // set rgb channels to computed value]
+            data[cell + 3] = 255; // alpha.
+          }
+        }
+
+        ctx.putImageData(image, 0, 0);
+
+        height++;
+        requestAnimationFrame(drawFrame);
+      }
+
+      requestAnimationFrame(drawFrame);
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
