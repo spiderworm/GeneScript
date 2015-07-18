@@ -35,14 +35,14 @@ export default class Registry {
       }
     }
     if (config.base) {
-      var subConfig = resolve(config.base);
+      var subConfig = this.getProfileConfig(config.base);
       extend(result,subConfig);
     }
     extend(result,config);
-    delete result.base;
     if (result.distribution) {
       result.distribution = this.getDistributionConfig(result.distribution, args);
     }
+    delete result.base;
     return result;
   }
 
@@ -63,7 +63,7 @@ export default class Registry {
       }
     }
     if (config.base) {
-      var subConfig = resolve(config.base);
+      var subConfig = this.getDistributionConfig(config.base);
       extend(result,subConfig);
     }
     extend(result,config);
