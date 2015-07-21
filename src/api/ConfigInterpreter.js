@@ -9,8 +9,17 @@ export default class ConfigInterpreter {
 
   get registry() { return this._registry; }
 
+  getSolverProfileConfig(raw, args) {
+    var config = this._getConfigObject(raw, args, this._registry.solvers);
+    return config;
+  }
+
   getDistributionConfig(raw, args) {
-    return this._getConfigObject(raw, args, this._registry.distributions);
+    var config = this._getConfigObject(raw, args, this._registry.distributions);
+    if (raw.solver) {
+      config.solver = this._getConfigObject(config.solver, args, this._registry.solvers);
+    }
+    return config;
   }
 
   getObjectProfileConfig(raw, args) {

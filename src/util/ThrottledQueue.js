@@ -10,7 +10,13 @@ function ThrottledQueue(queue, callback, seconds) {
   this.start();
 }
 ThrottledQueue.prototype.add = function(val) {
-  this._queue.push(val);
+  this.addAt(val,this._queue.length);
+}
+ThrottledQueue.prototype.addFirst = function(val) {
+  this.addAt(val,0);
+}
+ThrottledQueue.prototype.addAt = function(val, i) {
+  this._queue.splice(i,1,val);
   if(!this.isRunning() && this.autoStart) {
     this.start();
   }

@@ -1,15 +1,20 @@
 
 import Node3D from 'es6!../node/Node3D';
-import Solver from 'es6!./Solver';
+import MeshSolver3D from 'es6!./MeshSolver3D';
 
-export default class SingleObject3DSolver extends Solver {
+export default class SingleObjectSolver3D extends MeshSolver3D {
   
-  constructor(x,y,z,value) {
-    super();
-    this._node = new Node3D(x,y,z,value);
+  constructor(mask,options) {
+    super(null,mask,options);
+    this._node = new Node3D(
+      options.x,
+      options.y,
+      options.z,
+      options.value
+    );
   }
 
-  getNodesInArea(x,y,z,w,h,d) {
+  render(x,y,z,w,h,d) {
     var results = [];
     if (
       x <= this._node.x &&

@@ -29,6 +29,10 @@ export default class ThreeView {
     return this._scene;
   }
 
+  showBlock(x,y,z) {
+    this._traveller.renderBlock(x,y,z);
+  }
+
   setPosition(x,y,z) {
     var scale = this._scale;
     this._traveller.setPosition(

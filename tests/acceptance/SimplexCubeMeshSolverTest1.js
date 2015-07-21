@@ -26,14 +26,14 @@ export default class SimplexCubeMeshSolverTest1 extends Test {
       distributions: {
 
         stars: {
-          type: "SimplexCubeMeshSolver",
-          node: {
-            distance: .5,
-            scatter: .1
+          base: "SimplexMesh3D",
+          solver: {
+            nodeDistance: .5,
+            nodeScatter: .1
           },
           mask: {
             scale: 1,
-            strength: 0
+            strength: .8
           }
         }
 

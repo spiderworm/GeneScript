@@ -9,10 +9,10 @@ var config = {
   distributions: {
 
     stars: {
-      type: "SimplexCubeMeshSolver",
-      node: {
-        distance: .35,
-        scatter: .4
+      base: "SimplexMesh3D",
+      solver: {
+        nodeDistance: .35,
+        nodeScatter: .4
       },
       mask: {
         scale: 1,

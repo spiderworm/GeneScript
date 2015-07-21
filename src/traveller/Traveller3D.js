@@ -40,6 +40,10 @@ Traveller3D.prototype.setPosition = function(x,y,z) {
   }
 }
 
+Traveller3D.prototype.renderBlock = function(x,y,z) {
+  this._queue.addFirst({x: x, y: y, z: z});
+}
+
 Traveller3D.prototype.onBlockInRange = function(callback) {
   this._blocks.subscribe(callback);
 }
