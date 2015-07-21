@@ -11,9 +11,9 @@ export default class ObjectDistributionProfile extends Profile {
 
   render(x,y,z,w,h,d,xOffset,yOffset,zOffset,scaleOffset) {
     var results = [];
-    var config = this._api.getProfileConfig(this._config, [this._rand]);
+    var config = this._api.getObjectProfileConfig(this._config, [this._rand]);
 
-    var positionProfile = new PositionProfile(config);
+    var positionProfile = new PositionProfile(config.position);
     var distributionProfile = new DistributionProfile(
       this._api,
       this._seed + ".distributed",
@@ -49,7 +49,7 @@ class ObjectProfile extends Profile {
 
   render(node, xOffset, yOffset, zOffset, scaleOffset) {
     var rand = new Rand(this._seed + ',' + node.id + ',' + [xOffset,yOffset,zOffset].join(','));
-    var vals = this._api.getProfileConfig(this._config, [rand]);
+    var vals = this._api.getObjectProfileConfig(this._config, [rand]);
     var scale = scaleOffset;
     vals.x = (node.x * scale) + xOffset;
     vals.y = (node.y * scale) + yOffset;

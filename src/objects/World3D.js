@@ -15,8 +15,11 @@ export default class World3D extends GeneObject3D {
   getBlockAt(x,y,z) {
     var block = this._blocks.getByPosition(x,y,z);
     if (!block) {
+      var start = +new Date();
       block = this._profile.renderBlock(x,y,z,1);
       this._blocks.add(block);
+      var stop = +new Date();
+      //console.info('duration',stop - start);
     }
     return block;
   }

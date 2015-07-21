@@ -1,4 +1,6 @@
 
+import ThrottledQueue from '../../util/ThrottledQueue';
+
 export default class ThreeView {
   
   constructor(THREE, traveller, scale) {
@@ -7,9 +9,19 @@ export default class ThreeView {
     this._scale = scale;
     this._scene = new THREE.Scene();
 
+    var queue = new ThrottledQueue(
+      [],
+      function(three) {
+        this._scene.add(three);
+      }.bind(this),
+      .2
+    );
+    queue.autoStop = false;
+    queue.autoStart = true;
+
     this._traveller.onBlockInRange(function(block) {
       var three = new ThreeThing(THREE, block, 0, 0, 0, scale);
-      this._scene.add(three);
+      queue.add(three);
     }.bind(this));
   }
 

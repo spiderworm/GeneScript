@@ -3,7 +3,7 @@ function ThrottledQueue(queue, callback, seconds) {
   queue = queue || [];
   this._queue = queue.concat([]);
   this._callback = callback;
-  this._ms = (seconds || 100) / 1000;
+  this._ms = (seconds || 1) * 1000;
   this.autoStop = true;
   this.autoStart = true;
   this.repeat = 0;

@@ -18,12 +18,31 @@ export default class GeneScriptAPI {
     return this._getConfigObject(raw, args, this._registry.distributions);
   }
 
-  getProfileConfig(raw, args) {
-    return this._getConfigObject(raw, args, this._registry.profiles);
-  }
-
   getObjectProfileConfig(raw, args) {
-    return this.getProfileConfig(raw, args);
+    var config = this._getConfigObject(raw, args, this._registry.profiles);
+
+    var position = config.position;
+    if (typeof position !== "function") {
+      position = function() {
+        return {
+          x: config.x,
+          y: config.y,
+          z: config.z
+        };
+      }
+    };
+    /*
+    delete config.x;
+    delete config.y;
+    delete config.z;
+    */
+    config.position = position;
+
+    if(config.shape) {
+      config.shape = this._getConfigObject(config.shape,args,this._registry.shapes);
+    }
+
+    return config;
   }
 
   getWorldConfig(raw, args) {

@@ -1,8 +1,10 @@
 
 function Distribution(solver) {
-  return function(x,y,z,w,h,d) {
+  var distribution = function(x,y,z,w,h,d) {
     return solver.getNodesInArea(x,y,z,w,h,d);
   }
+  distribution.solver = solver;
+  return distribution;
 }
 
 export default Distribution;

@@ -6,7 +6,10 @@ export default class Registry {
   constructor() {
     this._vals = {
       profiles: {},
-      distributions: {}
+      distributions: {},
+      shapes: {
+        Sphere: {}
+      }
     };
   }
 
@@ -19,6 +22,8 @@ export default class Registry {
   get profiles() { return this._vals.profiles; }
 
   get distributions() { return this._vals.distributions; }
+
+  get shapes() { return this._vals.shapes; }
 
   get config() { return this._vals; }
 

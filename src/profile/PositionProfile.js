@@ -1,36 +1,20 @@
 
 import Profile from 'es6!./Profile';
+import primitiveUtil from 'es6!../util/primitiveUtil';
 
 export default class PositionProfile extends Profile {
 
   constructor(config) {
-    var vals = {};
-    if (config.position) {
-      if (typeof config.position !== "function") {
-        var position = config.position;
-        config = function() {
-          return {
-            x: position.x || 0,
-            y: position.y || 0,
-            z: position.z || 0
-          };
-        }
-      }
-    } else {
-      var position = config;
-      config = function() {
-        return {
-          x: position.x || 0,
-          y: position.y || 0,
-          z: position.z || 0
-        };
-      };
-    }
     super(null,null,config);
   }
 
   render() {
-    return this._config();
+    var result = this._config();
+    return {
+      x: primitiveUtil.getNumber(result.x,0),
+      y: primitiveUtil.getNumber(result.y,0),
+      z: primitiveUtil.getNumber(result.z,0)
+    };
   }
 
   _getConfigObject() {
