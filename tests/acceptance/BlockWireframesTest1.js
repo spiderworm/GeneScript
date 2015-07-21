@@ -9,8 +9,8 @@ export default class BlockWireframesTest1 extends Test {
     var canvas = document.querySelector('canvas');
 
     var generator = new GeneScript({});
-
-    var traveller = generator.createTraveller(0);
+    var world = generator.createWorld();
+    var traveller = world.createTraveller(0);
     var geneView = ThreeViewFactory.create(THREE, traveller, 3);
     geneView.enableBlockWireframes();
     super(canvas, geneView);

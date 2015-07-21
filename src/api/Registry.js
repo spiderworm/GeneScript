@@ -3,7 +3,7 @@ import extend from 'es6!../util/extend';
 
 export default class Registry {
   
-  constructor() {
+  constructor(vals) {
     this._vals = {
       profiles: {},
       distributions: {},
@@ -11,6 +11,7 @@ export default class Registry {
         Sphere: {}
       }
     };
+    this.extend(vals);
   }
 
   extend(vals) {
@@ -26,5 +27,11 @@ export default class Registry {
   get shapes() { return this._vals.shapes; }
 
   get config() { return this._vals; }
+
+  static clone(registry) {
+    var vals = extend({},registry.config);
+    registry = new Registry(vals);
+    return registry;
+  }
 
 }

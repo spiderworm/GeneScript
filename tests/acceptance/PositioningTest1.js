@@ -65,7 +65,9 @@ export default class PositioningTest1 extends Test {
       }
     });
 
-    var traveller = generator.createTraveller(0);
+    var world = generator.createWorld();
+    var traveller = world.createTraveller(0);
+    //console.info(world.getBlockAt(0,0,0));
     var geneView = ThreeViewFactory.create(THREE, traveller, 1);
     super(canvas, geneView);
 
@@ -81,10 +83,11 @@ export default class PositioningTest1 extends Test {
     traveller.onBlockInRange(function(block) {
       if (block.id === "0,0,0") {
         this.testBlock = block;
+        this._camera.position.set(-2.2,0,0);
+        this.run();
       }
     }.bind(this));
 
-    this._camera.position.set(-2.2,0,0);
     this.pinCameraTarget(0,0,0);
   }
 
@@ -173,5 +176,3 @@ export default class PositioningTest1 extends Test {
 }
 
 var test = new PositioningTest1();
-test.run();
-

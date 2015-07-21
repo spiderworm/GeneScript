@@ -1,6 +1,7 @@
 
 import Block3DCollection from 'es6!../block/Block3DCollection';
 import GeneObject3D from 'es6!./GeneObject3D';
+import Traveller3D from 'es6!../traveller/Traveller3D';
 
 export default class World3D extends GeneObject3D {
 
@@ -19,9 +20,12 @@ export default class World3D extends GeneObject3D {
       block = this._profile.renderBlock(x,y,z,1);
       this._blocks.add(block);
       var stop = +new Date();
-      //console.info('duration',stop - start);
     }
     return block;
+  }
+
+  createTraveller(range) {
+    return new Traveller3D(this,range);
   }
 
 }

@@ -1,5 +1,5 @@
 
-import ThrottledQueue from '../../util/ThrottledQueue';
+import ThrottledQueue from 'es6!../../util/ThrottledQueue';
 
 export default class ThreeView {
   

@@ -13,8 +13,8 @@ export default class GalaxyDemo extends Demo {
     var canvas = document.querySelector('canvas');
 
     var generator = new GeneScript(galaxyConfig);
-
-    var traveller = generator.createTraveller(1);
+    var world = generator.createWorld();
+    var traveller = world.createTraveller(1);
     var geneView = ThreeViewFactory.create(THREE, traveller, 1);
     //geneView.enableBlockWireframes();
     super(canvas, geneView);

@@ -3,7 +3,6 @@ import GeneScriptApiFactory from 'es6!./api/GeneScriptApiFactory';
 import WorldFactory from 'es6!./objects/WorldFactory';
 import WorldProfile from 'es6!./profile/WorldProfile';
 import ObjectDistributionProfile from 'es6!./profile/ObjectDistributionProfile';
-import Traveller3D from 'es6!./traveller/Traveller3D';
 
 export default class GeneScript {
 
@@ -13,10 +12,11 @@ export default class GeneScript {
     this.addConfig(rawConfig);
   }
 
-  createTraveller(range) {
-    var worldProfile = new WorldProfile(this._api);
+  createWorld() {
+    var interpreter = this._api.createInterpreter();
+    var worldProfile = new WorldProfile(interpreter);
     var world = WorldFactory.getWorld(worldProfile);
-    return new Traveller3D(world,range);
+    return world;
   }
 
 }

@@ -104,7 +104,8 @@ export default class SimplexCubeMeshSolverTest1 extends Test {
       }
     });
 
-    var traveller = generator.createTraveller(1);
+    var world = generator.createWorld();
+    var traveller = world.createTraveller(1);
     var geneView = ThreeViewFactory.create(THREE, traveller, .5);
     geneView.enableBlockWireframes();
     super(canvas, geneView, testVals);
