@@ -6,6 +6,7 @@ export default class Node3D {
     this.y = y;
     this.z = z;
     this.value = value;
+    this.id = [x,y,z].join(',');
   }
 
 }

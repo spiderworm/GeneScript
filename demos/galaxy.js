@@ -33,26 +33,53 @@ export default class GalaxyDemo extends Demo {
 
       profiles: {
 
-        universe: {
-          shape: "Sphere",
-          color: 0xffffff,
-          size: .01,
-          range: 5,
+        universe: "solarSystems",
+
+        solarSystems: {
+          base: "solarSystem",
           distribution: "stars",
-          objects: function() {
-            return {
-              planets: {
-                scale: .1,
-                color: 0xff9999,
-                size: .01,
-                shape: "Sphere",
-                range: 1,
-                x: .01,
-                y: 0,
-                z: 0
-              }
-            };
+          scale: .1
+        },
+
+        solarSystem: {
+          size: 1,
+          range: 1e200,
+          objects: {
+            sun: {
+              base: "sun",
+              scale: 1e-12,
+              x: 0,
+              y: 0,
+              z: 0
+            },
+            planet1: {
+              base: "planet",
+              scale: 1e-10,
+              x: .1,
+              y: 0,
+              z: 0
+            }
           }
+        },
+
+        sun: function(rand) {
+          //console.info(rand('color'));
+          return {
+            shape: "Sphere",
+            color: (256 * 256 * Math.floor(106 * rand('red') + 150)) +
+                   (256 * Math.floor(106 * rand('green') + 150)) +
+                   Math.floor(106 * rand('blue') + 150),
+            size: 1e10 + (5e10 * rand('size'))
+          };
+        },
+
+        planet: function() {
+          return {
+            color: 0xff9999,
+            size: 4e6,
+            shape: "Sphere",
+            range: 1
+          };
         }
 
       }

@@ -41,18 +41,16 @@ export default class SimplexCubeMeshSolverTest1 extends Test {
 
       profiles: {
 
-        universe: function() {
-          return {
-            shape: "Sphere",
-            color: 0xffffff,
-            size: .05,
-            range: 100,
-            distribution: "stars",
-            scale: 1,
-            objects: {
-              redSphere: "redSphere"
-            }
-          };
+        universe: {
+          shape: "Sphere",
+          color: 0xffffff,
+          size: .05,
+          range: 100,
+          distribution: "stars",
+          scale: 1,
+          objects: {
+            redSphere: "redSphere"
+          }
         },
 
         sphere: {
@@ -65,16 +63,31 @@ export default class SimplexCubeMeshSolverTest1 extends Test {
           z: 0
         },
 
-        redSphere: {
-          base: "sphere",
-          scale: .1,
-          color: 0xff9999,
-          size: .1,
-          x: testVals.redSphereX,
-          y: testVals.redSphereY,
-          z: testVals.redSphereZ,
-          objects: {
-            blueSphere: "blueSphere"
+        redSphere: function() {
+          return {
+            base: "sphere",
+            scale: .1,
+            color: 0xff9999,
+            size: function(node) {
+              return {
+                x: function(node) {
+                  return .1;
+                },
+                y: function(node) {
+                  return .1;
+                },
+                z: function(node) {
+                  return .1;
+                }
+              };
+            },
+            size: .1,
+            x: testVals.redSphereX,
+            y: testVals.redSphereY,
+            z: testVals.redSphereZ,
+            objects: {
+              blueSphere: "blueSphere"
+            }
           }
         },
 
